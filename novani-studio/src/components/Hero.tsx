@@ -60,7 +60,7 @@ const Hero = ({ onExploreClick }: HeroProps) => {
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 fade-in delay-800">
         <div
-          className="w-[1px] h-16 animate-pulse"
+          className="w-1px h-16 animate-pulse"
           style={{ backgroundColor: "hsla(var(--warm-white), 0.3)" }}
         />
       </div>

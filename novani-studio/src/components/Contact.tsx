@@ -196,7 +196,7 @@ const Contact = () => {
           >
             <p>
               <a
-                href="https://wa.me/254700000000"
+                href="https://wa.me/254797376009"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline transition-opacity hover:opacity-80"
@@ -219,10 +219,10 @@ const Contact = () => {
             <p>
               Call us at{" "}
               <a
-                href="tel:+254XXXXXXXXX"
+                href="tel:+254750850551"
                 style={{ color: "hsl(var(--gold))" }}
               >
-                +254 XXX XXX XXX
+                +254 750 850 551
               </a>
             </p>
           </div>

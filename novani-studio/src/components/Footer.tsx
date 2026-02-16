@@ -85,7 +85,7 @@ const Footer = ({ onNavigate }: FooterProps) => {
             <h4 className="font-serif text-lg mb-4">Contact</h4>
             <div className="space-y-3">
               <div className="flex items-start space-x-3">
-                <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
+                <MapPin className="w-4 h-4 mt-1 shrink-0" />
                 <span
                   className="text-sm"
                   style={{ color: "hsla(var(--warm-white), 0.8)" }}
@@ -95,7 +95,7 @@ const Footer = ({ onNavigate }: FooterProps) => {
               </div>
 
               <div className="flex items-start space-x-3">
-                <Phone className="w-4 h-4 mt-1 flex-shrink-0" />
+                <Phone className="w-4 h-4 mt-1 shrink-0" />
                 <span
                   className="text-sm"
                   style={{ color: "hsla(var(--warm-white), 0.8)" }}
@@ -105,7 +105,7 @@ const Footer = ({ onNavigate }: FooterProps) => {
               </div>
 
               <div className="flex items-start space-x-3">
-                <Mail className="w-4 h-4 mt-1 flex-shrink-0" />
+                <Mail className="w-4 h-4 mt-1 shrink-0" />
                 <span
                   className="text-sm"
                   style={{ color: "hsla(var(--warm-white), 0.8)" }}
@@ -124,7 +124,7 @@ const Footer = ({ onNavigate }: FooterProps) => {
               style={{ color: "hsla(var(--warm-white), 0.8)" }}
             >
               <div className="flex items-start space-x-3">
-                <Clock className="w-4 h-4 mt-1 flex-shrink-0" />
+                <Clock className="w-4 h-4 mt-1 shrink-0" />
                 <div>
                   <p>Monday – Friday</p>
                   <p>9:00 AM – 6:00 PM</p>
@@ -132,7 +132,7 @@ const Footer = ({ onNavigate }: FooterProps) => {
               </div>
 
               <div className="flex items-start space-x-3">
-                <Clock className="w-4 h-4 mt-1 flex-shrink-0" />
+                <Clock className="w-4 h-4 mt-1 shrink-0" />
                 <div>
                   <p>Saturday</p>
                   <p>10:00 AM – 4:00 PM</p>
