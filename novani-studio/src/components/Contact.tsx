@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
+import emailjs from "@emailjs/browser";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Full name is required").max(100),
@@ -29,20 +30,37 @@ const Contact = () => {
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
+     //Handle form submission with email.js and validation using Zod
+            const handleSubmit = async (e: React.FormEvent) => {
+              e.preventDefault();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+              try {
+                contactSchema.parse(formData);
 
-    try {
-      contactSchema.parse(formData);
-      toast.success("Thank you. Our studio will be in touch shortly.");
-      setFormData({ name: "", email: "", phone: "", message: "" });
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        toast.error(error.issues[0].message);
-      }
-    }
-  };
+                await emailjs.send(
+                  import.meta.env.VITE_EMAIL_SERVICE,
+                  import.meta.env.VITE_EMAIL_TEMPLATE,
+                  {
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone || "Not provided",
+                    message: formData.message,
+                  },
+                  import.meta.env.VITE_EMAIL_PUBLIC
+                );
+
+                toast.success("Thank you. Our studio will be in touch shortly.");
+                setFormData({ name: "", email: "", phone: "", message: "" });
+
+              } catch (error) {
+                if (error instanceof z.ZodError) {
+                  toast.error(error.issues[0].message);
+                } else {
+                  console.error(error);
+                  toast.error("Something went wrong. Please try again.");
+                }
+              }
+            };
 
   return (
     <section
