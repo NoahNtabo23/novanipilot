@@ -8,7 +8,7 @@ const projects = [
   { id: 1, title: "Modern Living Space", image: project1 },
   { id: 2, title: "Premium Wardrobe", image: project2 },
   { id: 3, title: "Elegant Dining Area", image: project3 },
-  { id: 4, title: "Luxury Bedroom", image: project4 },
+  { id: 4, title: "Luxury Kitchen", image: project4 },
 ];
 
 const Projects = () => {
