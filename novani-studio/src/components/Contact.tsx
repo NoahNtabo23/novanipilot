@@ -19,6 +19,39 @@ const Contact = () => {
     message: "",
   });
 
+  const faqs = [
+    {
+      question: "How do I begin a project with NOVANI Studio?",
+      answer:
+        "Your journey begins with a consultation. Simply complete the contact form or reach out directly, and our team will schedule a conversation to understand your space and vision.",
+    },
+    {
+      question: "What types of projects does NOVANI Studio specialize in?",
+      answer:
+        "We specialize in refined residential interiors including bespoke kitchens, wardrobes, living spaces, and full-home transformations.",
+    },
+    {
+      question: "Do you offer design consultations?",
+      answer:
+        "Yes. Our consultations allow us to understand your space, lifestyle, and aesthetic preferences before developing a tailored design proposal.",
+    },
+    {
+      question: "How long does an interior design project typically take?",
+      answer:
+        "Project timelines vary depending on scope and customization. After the consultation we provide a detailed project schedule.",
+    },
+    {
+      question: "Can you work with my existing furniture or layout?",
+      answer:
+        "Absolutely. We often integrate existing elements into a refined design concept that enhances your space.",
+    },
+    {
+      question: "Do you manage the full project execution?",
+      answer:
+        "Yes. Our studio oversees design, coordination, and installation to ensure the highest level of craftsmanship.",
+    },
+  ];
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -30,37 +63,37 @@ const Contact = () => {
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
-     //Handle form submission with email.js and validation using Zod
-            const handleSubmit = async (e: React.FormEvent) => {
-              e.preventDefault();
 
-              try {
-                contactSchema.parse(formData);
+  // Handle form submission with email.js and validation using Zod
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-                await emailjs.send(
-                  import.meta.env.VITE_EMAIL_SERVICE,
-                  import.meta.env.VITE_EMAIL_TEMPLATE,
-                  {
-                    name: formData.name,
-                    email: formData.email,
-                    phone: formData.phone || "Not provided",
-                    message: formData.message,
-                  },
-                  import.meta.env.VITE_EMAIL_PUBLIC
-                );
+    try {
+      contactSchema.parse(formData);
 
-                toast.success("Thank you. Our studio will be in touch shortly.");
-                setFormData({ name: "", email: "", phone: "", message: "" });
+      await emailjs.send(
+        import.meta.env.VITE_EMAIL_SERVICE,
+        import.meta.env.VITE_EMAIL_TEMPLATE,
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || "Not provided",
+          message: formData.message,
+        },
+        import.meta.env.VITE_EMAIL_PUBLIC
+      );
 
-              } catch (error) {
-                if (error instanceof z.ZodError) {
-                  toast.error(error.issues[0].message);
-                } else {
-                  console.error(error);
-                  toast.error("Something went wrong. Please try again.");
-                }
-              }
-            };
+      toast.success("Thank you. Our studio will be in touch shortly.");
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast.error(error.issues[0].message);
+      } else {
+        console.error(error);
+        toast.error("Something went wrong. Please try again.");
+      }
+    }
+  };
 
   return (
     <section
@@ -70,7 +103,6 @@ const Contact = () => {
       style={{ backgroundColor: "hsl(var(--warm-white))" }}
     >
       <div className="max-w-3xl mx-auto text-center">
-
         {/* Heading */}
         <h2
           className={`font-serif text-5xl md:text-6xl tracking-wide mb-6 ${
@@ -156,65 +188,106 @@ const Contact = () => {
 
           {/* Button */}
           <button
-              type="submit"
-              className="
+            type="submit"
+            className="
                 w-full py-6 rounded-md text-sm tracking-widest font-semibold
                 transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]
                 hover:-translate-y-1 hover:shadow-xl
                 active:-translate-y-1 active:shadow-xl
               "
-              style={{
-                backgroundColor: "hsl(var(--gold))",
-                color: "hsl(var(--charcoal))",
-              }}
-            >
+            style={{
+              backgroundColor: "hsl(var(--gold))",
+              color: "hsl(var(--charcoal))",
+            }}
+          >
             Request a Consultation
           </button>
-
         </form>
 
-        {/* Direct contact */}
-        <div className="mt-20 pt-12 border-t border-[hsl(var(--border))]">
-          <p
-            className="text-lg mb-6"
+        <div className="mt-28 max-w-4xl mx-auto">
+          <h3
+            className="font-serif text-4xl text-center mb-12"
             style={{ color: "hsl(var(--charcoal))" }}
           >
-            Prefer a direct conversation?
-          </p>
+            Frequently Asked Questions
+          </h3>
 
-          <div
-            className="space-y-3"
-            style={{ color: "hsla(var(--foreground), 0.65)" }}
-          >
-            <p>
-              <a
-                href="https://wa.me/254742981681"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[hsl(var(--gold))] transition-colors duration-500"
-              >
-                WhatsApp: +254 742 981 681
-              </a>
-            </p>
+          <div className="space-y-6">
+            {faqs.map((faq, index) => {
+              const isOpen = openFAQ === index;
 
-            <p>
-              <a
-                href="mailto:novanistudio.ke@gmail.com"
-                className="hover:text-[hsl(var(--gold))] transition-colors duration-500"
-              >
-                novanistudio.ke@gmail.com
-              </a>
-            </p>
+              return (
+                <div
+                  key={index}
+                  className="border-b border-[hsla(var(--foreground),0.15)] pb-6 group"
+                >
+                  <button
+                    onClick={() => setOpenFAQ(isOpen ? null : index)}
+                    className="w-full flex justify-between items-center text-left transition-all duration-300"
+                    style={{
+                      color: isOpen ? "hsl(var(--gold))" : "hsl(var(--charcoal))",
+                    }}
+                  >
+                    <span
+                      className="font-medium text-lg transition-colors duration-300 group-hover:text-[hsl(var(--gold))]"
+                      style={{
+                        color: isOpen ? "hsl(var(--gold))" : "hsl(var(--charcoal))",
+                      }}
+                    >
+                      {faq.question}
+                    </span>
+
+                    {/* Plus → X with smooth rotation */}
+                    <div className="relative flex items-center justify-center w-6 h-6">
+                      <span
+                        className={`absolute transition-all duration-300 ease-out ${
+                          isOpen
+                            ? "opacity-0 rotate-90 scale-75"
+                            : "opacity-100 rotate-0 scale-100"
+                        }`}
+                        style={{ fontSize: "1.5rem", lineHeight: 1 }}
+                      >
+                        +
+                      </span>
+                      <span
+                        className={`absolute transition-all duration-300 ease-out ${
+                          isOpen
+                            ? "opacity-100 rotate-0 scale-100"
+                            : "opacity-0 -rotate-90 scale-75"
+                        }`}
+                        style={{ fontSize: "1.25rem", lineHeight: 1 }}
+                      >
+                        ✕
+                      </span>
+                    </div>
+                  </button>
+
+                  {/* Smooth accordion animation with max-height transition */}
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] ${
+                      isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    <p
+                      className="mt-4 text-base leading-relaxed pb-2"
+                      style={{ color: "hsla(var(--foreground),0.7)" }}
+                    >
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-
-          <p
-            className="text-sm mt-8 italic"
-            style={{ color: "hsla(var(--foreground), 0.5)" }}
-          >
-            Your information is kept strictly confidential.
-          </p>
         </div>
 
+        {/* Direct contact */}
+        <p
+          className="text-sm mt-10 italic fade-in-up delay-600"
+          style={{ color: "hsla(var(--foreground), 0.5)" }}
+        >
+          Your information is treated with complete discretion.
+        </p>
       </div>
     </section>
   );

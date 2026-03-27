@@ -16,13 +16,13 @@ import project3_Two from "@/assets/project-3.2.jpg";
 import project3_Three from "@/assets/project-3.3.jpg";
 import project3_Four from "@/assets/project-3.4.jpg";
 import project3_Five from "@/assets/project-3.5.jpg";
-import project3_Six from "@/assets/project-3.6.jpg";  
-import project4 from "@/assets/projects-4.1.jpg";
-import project4_Two from "@/assets/projects-4.2.jpg";
+import project3_Six from "@/assets/project-3.6.jpg";
+import project4 from "@/assets/projects-4.2.jpg";
+import project4_Two from "@/assets/projects-4.1.jpg";
 import project4_Three from "@/assets/projects-4.3.jpg";
 import project4_Four from "@/assets/projects-4.4.jpg";
 import project4_Five from "@/assets/projects-4.5.jpg";
-import project4_Six from "@/assets/projects-4.6.jpg";  
+import project4_Six from "@/assets/projects-4.6.jpg";
 
 const projects = [
   {
@@ -57,6 +57,7 @@ const Projects = () => {
 
   const sectionRef = useRef<HTMLElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
+  const galleryScrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -74,10 +75,18 @@ const Projects = () => {
 
     if (newProject !== null) {
       setTimeout(() => {
+
+        // reset gallery scroll to first image
+        galleryScrollRef.current?.scrollTo({
+          left: 0,
+          behavior: "instant",
+        });
+
         galleryRef.current?.scrollIntoView({
           behavior: "smooth",
           block: "center",
         });
+
       }, 200);
     }
   };
@@ -117,19 +126,16 @@ const Projects = () => {
               style={{ animationDelay: `${index * 120}ms` }}
             >
 
-              {/* Image */}
               <img
                 src={project.cover}
                 alt={project.title}
                 className="w-full h-[480px] object-cover transition-transform duration-700 group-hover:scale-105"
               />
 
-              {/* Overlay */}
               <div className="absolute inset-0 flex items-end md:items-center justify-center">
 
                 <div className="absolute inset-0 bg-[hsla(var(--charcoal),0.55)] opacity-80 md:opacity-0 md:group-hover:opacity-100 transition-all duration-500" />
 
-                {/* Title */}
                 <h3
                   className="relative font-serif text-2xl md:text-3xl tracking-wide px-6 py-6 text-center transform transition-all duration-500
                   translate-y-0 md:translate-y-6 md:group-hover:translate-y-0
@@ -152,7 +158,6 @@ const Projects = () => {
 
           <div ref={galleryRef} className="mt-20 fade-in-up">
 
-            {/* Divider */}
             <div className="w-24 h-px bg-[hsl(var(--gold))] opacity-60 mb-10 mx-auto"></div>
 
             <h3
@@ -162,23 +167,22 @@ const Projects = () => {
               {activeGallery.title}
             </h3>
 
-            {/* Gallery Wrapper */}
             <div className="relative">
 
-              {/* Left Fade */}
-              <div className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-[hsl(var(--cream))] to-transparent z-10" />
+              {/* subtle fade hints */}
+              <div className="pointer-events-none absolute left-0 top-0 h-full w-8 md:w-12 bg-gradient-to-r from-[hsl(var(--cream))] to-transparent z-10" />
+              <div className="pointer-events-none absolute right-0 top-0 h-full w-8 md:w-12 bg-gradient-to-l from-[hsl(var(--cream))] to-transparent z-10" />
 
-              {/* Right Fade */}
-              <div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-[hsl(var(--cream))] to-transparent z-10" />
-
-              {/* Horizontal Gallery */}
-              <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x snap-mandatory">
+              <div
+                ref={galleryScrollRef}
+                className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x snap-mandatory"
+              >
 
                 {activeGallery.gallery.map((img, index) => (
 
                   <div
                     key={index}
-                    className="snap-start min-w-[380px] md:min-w-[420px] h-[320px] md:h-[420px] overflow-hidden rounded-sm shadow-lg flex-shrink-0"
+                    className="snap-start min-w-[360px] md:min-w-[420px] h-[320px] md:h-[420px] overflow-hidden rounded-sm shadow-lg flex-shrink-0"
                   >
                     <img
                       src={img}

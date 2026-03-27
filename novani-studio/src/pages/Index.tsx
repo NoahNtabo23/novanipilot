@@ -6,6 +6,7 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import HamburgerMenu from "@/components/HamburgerMenu";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import Logo from "@/components/Logo";
 
 const Index = () => {
   const scrollToSection = (sectionId: string) => {
@@ -24,9 +25,8 @@ const Index = () => {
       className="min-h-screen"
       style={{ backgroundColor: "hsl(var(--background))" }}
     >
-      
-       <HamburgerMenu onNavigate={scrollToSection} /> 
-
+      <Logo />
+      <HamburgerMenu onNavigate={scrollToSection} /> 
       <Hero onExploreClick={() => scrollToSection("projects")} />
       <About />
       <Projects />

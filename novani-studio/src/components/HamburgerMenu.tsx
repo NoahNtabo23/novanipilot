@@ -78,7 +78,7 @@ const HamburgerMenu = ({ onNavigate }: HamburgerMenuProps) => {
               <span
                 className="
                   absolute left-1/2 -bottom-3
-                  h-1px w-0
+                  h-[1px] w-0
                   bg-[hsl(var(--gold))]
                   transition-all duration-500
                   group-hover:w-20 group-hover:-translate-x-1/2
