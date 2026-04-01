@@ -4,7 +4,7 @@ import { useState } from "react";
 const WhatsAppButton = () => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const phoneNumber = "254797376009"; // replace with real number
+  const phoneNumber = "254742981681"; // replace with real number
   const message =
     "Hello NOVANI Studio, I'm interested in your interior design services.";
 

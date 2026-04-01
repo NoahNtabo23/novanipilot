@@ -1,4 +1,4 @@
-import heroImage from "@/assets/hero-kitchen.jpg";
+import heroImage from "@/assets/hero-kitchen.webp";
 
 interface HeroProps {
   onExploreClick: () => void;

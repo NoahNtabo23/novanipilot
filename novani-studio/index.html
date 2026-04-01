@@ -10,9 +10,84 @@
     <meta property="og:description" content="Premium interior design studio in Nairobi specializing in luxury kitchens, wardrobes, and residential interiors." />
     <meta property="og:type" content="website" />
     <link rel="icon" href="/logo.png" />
+    
+    <!-- Preload critical fonts for better performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+      /* Loading skeleton styles */
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      
+      @keyframes pulse {
+        0%, 100% { opacity: 0.4; }
+        50% { opacity: 0.8; }
+      }
+      
+      #preload {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #FAF7F2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-family: 'Playfair Display', serif;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+      }
+      
+      .spinner {
+        width: 60px;
+        height: 60px;
+        border: 3px solid rgba(212, 175, 55, 0.2);
+        border-top-color: #D4AF37;
+        border-radius: 50%;
+        animation: spin 1s ease-in-out infinite;
+        margin: 0 auto 2rem;
+      }
+      
+      .brand-name {
+        color: #2C2C2C;
+        letter-spacing: 2px;
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+      }
+      
+      .loading-text {
+        color: rgba(44, 44, 44, 0.6);
+        font-family: 'Inter', sans-serif;
+        font-size: 0.875rem;
+        letter-spacing: 1px;
+      }
+      
+      .dot {
+        display: inline-block;
+        animation: pulse 1.4s ease-in-out infinite;
+      }
+      
+      .dot:nth-child(2) { animation-delay: 0.2s; }
+      .dot:nth-child(3) { animation-delay: 0.4s; }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Loading skeleton - visible until React hydrates -->
+      <div id="preload">
+        <div class="spinner"></div>
+        <div class="brand-name">NOVANI STUDIO</div>
+        <div class="loading-text">
+          Loading refined spaces<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import aboutImage from "@/assets/about-studio.jpg";
+import aboutImage from "@/assets/about-studio.webp";
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
